@@ -3,14 +3,13 @@ kind: Ingress
 metadata:
   name: simple-kubernetes-ingress
   annotations:
-    kubernetes.io/ingress.class: nginx
-    ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
   - host: arch.homework
     http:
       paths:
-      - path: /otusapp/kuzmicheva
+      - path: /otusapp/kuzmicheva(/|$)(.*)
         backend:
-          serviceName: simple-kubernetes
+          serviceName: simple-kubernetes-service
           servicePort: 9000
