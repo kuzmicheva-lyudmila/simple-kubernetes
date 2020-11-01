@@ -1,15 +1,16 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: simple-kubernetes-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
   - host: arch.homework
     http:
       paths:
-        - path: /otusapp/kuzmicheva($|/)(.*)
-          backend:
-            serviceName: simple-kubernetes
-            servicePort: 9000
+      - path: /otusapp/kuzmicheva
+        backend:
+          serviceName: simple-kubernetes
+          servicePort: 9000
